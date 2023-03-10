@@ -24,12 +24,14 @@ const init = () => {
         message: "What would you like to do?",
         choices: [
           "View All Employees",
-          "Add Employee",
-          "Updated Employee Role",
-          "Add Role",
           "View All Roles",
           "View All Departments",
+          "View Employee By Manager",
+          "View Employee By Department",
+          "Add Employee",
+          "Add Role",
           "Add Department",
+          "Updated Employee Role",
           "Quit",
         ],
       },
@@ -40,30 +42,37 @@ const init = () => {
 };
 
 const userInput = (data) => {
-  if (data.choices === "View All Employees") {
-    viewAllEmployees();
-  }
-  if (data.choices === "Add Employee") {
-    addEmployee();
-  }
-  if (data.choices === "Updated Employee Role") {
-    updateEmployeeRole();
-  }
-  if (data.choices === "Add Role") {
-    addRole();
-  }
-  if (data.choices === "View All Roles") {
-    viewAllRoles();
-  }
-  if (data.choices === "View All Departments") {
-    viewAllDepartment();
-  }
-  if (data.choices === "Add Department") {
-    addDepartment();
-  }
-  if (data.choices === "Quit") {
-    console.log("Thank you! Goodbye! 👋");
-    process.exit();
+  switch (data.choices) {
+    case "View All Employees":
+      viewAllEmployees();
+      break;
+    case "Add Employee":
+      addEmployee();
+      break;
+    case "Updated Employee Role":
+      updateEmployeeRole();
+      break;
+    case "Add Role":
+      addRole();
+      break;
+    case "View All Roles":
+      viewAllRoles();
+      break;
+    case "View All Departments":
+      viewAllDepartment();
+      break;
+    case "Add Department":
+      addDepartment();
+      break;
+    case "View Employee By Manager":
+      viewEmployeeByManager();
+      break;
+    case "View Employee By Department":
+      viewEmployeeByDepartment();
+      break;
+    default:
+      console.log("Thank you! Goodbye! 👋");
+      process.exit();
   }
 };
 
@@ -280,9 +289,25 @@ const addDepartment = () => {
     });
 };
 
+const viewEmployeeByManager = () => {
+  const sql = useSqlFunction.viewEmployeeByManager();
+  db.query(sql, (err, results) => {
+    err ? errorOccurred() : console.table(`\n`, results, `\n`);
+    init();
+  });
+};
+
+const viewEmployeeByDepartment = () => {
+  const sql = useSqlFunction.viewEmployeeByDepartment();
+  db.query(sql, (err, results) => {
+    err ? errorOccurred() : console.table(`\n`, results, `\n`);
+    init();
+  });
+};
+
 const errorOccurred = () => {
-  console.info(`\n`, `There is an error! Please try again!`, `\n`);
-  init();
+  console.info(`\n`, `There is an error! Please start again!`, `\n`);
+  return;
 };
 
 init();

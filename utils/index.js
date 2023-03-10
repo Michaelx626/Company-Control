@@ -17,32 +17,45 @@ class sqlFunctions {
     return `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, (SELECT id FROM role WHERE title = ?), (SELECT id FROM (SELECT * FROM employee) AS e WHERE CONCAT(e.first_name, ' ', e.last_name) = ?))`;
   }
 
-  updateEmployeeRole(){
+  updateEmployeeRole() {
     return `UPDATE role SET title = ? WHERE id = (SELECT role_id FROM employee WHERE CONCAT(first_name, ' ', last_name) = ?)`;
   }
 
-  viewAllRoles(){
+  viewAllRoles() {
     return `SELECT role.id, role.title, role.salary, department.name AS department FROM role LEFT JOIN department ON role.department_id = department.id`;
   }
 
-  viewAllDepartment(){
+  viewAllDepartment() {
     return `SELECT department.id, department.name AS department FROM department`;
   }
 
-  addDepartment(){
+  addDepartment() {
     return `INSERT INTO department (name) VALUES (?)`;
   }
 
-  departmentSelections(){
+  departmentSelections() {
     return `SELECT department.name AS department from department`;
   }
 
-  listNames(){
+  listNames() {
     return `SELECT employee.first_name AS first, employee.last_name AS last FROM employee`;
   }
 
-  roleChoices(){
+  roleChoices() {
     return `SELECT role.title AS title FROM role`;
+  }
+
+  viewEmployeeByManager() {
+    return `SELECT employee.id, employee.first_name AS first, employee.last_name AS last, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
+    FROM employee employee
+    LEFT JOIN employee manager ON employee.manager_id = manager.id WHERE employee.manager_id IS NOT NULL`;
+  }
+
+  viewEmployeeByDepartment() {
+    return `SELECT employee.id, employee.first_name AS first, employee.last_name AS last, department.name AS department
+    FROM employee 
+    JOIN role ON employee.role_id = role.id
+    JOIN department ON role.department_id = department.id;`;
   }
 }
 
