@@ -14,8 +14,8 @@
 <p align="center">N/A</p>
    
 <h2 align="center" id="Usage">Usage</h2>
-<p align="center">You can access my project, Company Control, by simply clicking on this highlighted text which will bring you to my tutorial video.</p>
-<p align="center"><a href="chrome-extension://mmeijimgabbpbgpdklnllpncmdofkcpn/app.html#/files/c0dca58d-76d5-4d3a-y6ac-cdce714f906d" target="_blank">Here</a></p>
+<p align="center">You can access my project, Company Control, by simply clicking on this highlighted text which will bring you to my tutorial video. You would need to download the video.</p>
+<p align="center"><a href="https://drive.google.com/file/d/1oOjftfX8gbfOBB-rOgCKVTLwGPDqiL6m/view" target="_blank">Here</a></p>
 
 <h2 align="center">Screenshots</h2>
 
